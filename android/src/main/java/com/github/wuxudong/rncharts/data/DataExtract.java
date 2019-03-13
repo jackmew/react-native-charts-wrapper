@@ -63,7 +63,11 @@ public abstract class DataExtract<D extends ChartData, U extends Entry> {
         ArrayList<U> entries = new ArrayList<>(yValues.size());
         for (int j = 0; j < yValues.size(); j++) {
             if (!yValues.isNull(j)) {
-                entries.add(createEntry(yValues, j));
+                try {
+                    entries.add(createEntry(yValues, j));
+                } catch (Exception e) {
+                    Log.d("Zest", "[react-native-chart-wrapper - createEntries] " + e);
+                }
             }
         }
         return entries;
